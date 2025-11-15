@@ -145,12 +145,15 @@ export const useCandidates = ({
      * Fetches candidates from the API with current search, filter, and sort parameters.
      */
     const fetchCandidates = async () => {
+      const apiBaseUrl =
+        import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
       try {
         setLoading(true);
         setError(null);
 
         const response = await fetch(
-          `http://localhost:8000/api/candidates?${buildUrlParams()}`
+          `${apiBaseUrl}/api/candidates?${buildUrlParams()}`
         );
 
         if (!response.ok) {
@@ -164,15 +167,13 @@ export const useCandidates = ({
         let errorMessage = 'An error occurred while fetching candidates';
 
         if (err instanceof TypeError && err.message === 'Failed to fetch') {
-          errorMessage =
-            'Unable to connect to the backend server. Please make sure the backend is running on http://localhost:8000';
+          errorMessage = `Unable to connect to the backend server. Please make sure the backend is running on ${apiBaseUrl}`;
         } else if (err instanceof Error) {
           if (
             err.message.includes('Failed to fetch') ||
             err.message.includes('NetworkError')
           ) {
-            errorMessage =
-              'Unable to connect to the backend server. Please make sure the backend is running on http://localhost:8000';
+            errorMessage = `Unable to connect to the backend server. Please make sure the backend is running on ${apiBaseUrl}`;
           } else {
             errorMessage = err.message;
           }

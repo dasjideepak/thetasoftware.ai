@@ -1,7 +1,5 @@
 # Submission Notes
 
-**TEMPLATE - Complete this form when submitting your work**
-
 **Candidate Name**: Deepak Sharma
 **Date**: 15th Nov, 2025
 **Time Spent**: 6-7 hours
@@ -39,18 +37,19 @@
 
 ## What I Would Do With More Time
 
-[List features, improvements, or refactorings you would add if you had more time]
+If I had more time, here's what I'd focus on:
 
-Examples:
+**Testing** - I'd add unit tests for the main components and some integration tests to make sure everything works together.
 
-- Add loading states with skeleton loaders
-- Implement more robust error handling
-- Add unit tests for components
-- Improve accessibility (ARIA labels, keyboard navigation)
-- Add animations for better UX
-- Implement URL state management
-- Add more filter categories
-- etc.
+**Performance** - For larger lists, I'd add virtualization so it doesn't slow down with hundreds of candidates. Could also memoize some components to prevent unnecessary re-renders.
+
+**Better UX** - Would be nice to save the search and filter state in the URL so users can bookmark or share specific views. Some smooth animations would make it feel more polished too.
+
+**More Features** - Keyboard shortcuts would be helpful (like Cmd+K for search). Bulk actions for selecting multiple candidates would be useful. Maybe add export to CSV.
+
+**Code Organization** - I'd move the API calls into a separate service file to keep things cleaner. Error boundaries would help catch issues better. Some logging would make debugging easier.
+
+**Accessibility** - Could improve keyboard navigation and make sure screen readers work well with all the dynamic content.
 
 ## Libraries/Packages Added
 
@@ -67,17 +66,28 @@ I used a few AI tools while building this:
 
 Overall, these tools saved me time, especially with FastAPI since it was new to me. They helped me move faster on syntax and patterns I wasn't super familiar with.
 
-Examples:
-
-- Used GitHub Copilot for autocompletion
-- Used ChatGPT to debug a TypeScript error
-- Used Claude to understand FastAPI query parameters
-- etc.
-
 ## Challenges & Solutions
 
-[Optional: Describe any challenges you faced and how you solved them]
+**Filter state management** - Used a Record<string, boolean> pattern for filter state which keeps the API mapping straightforward. The main consideration was ensuring filter changes properly trigger re-fetches without unnecessary API calls.
+
+**Design system consistency** - Replaced hardcoded hex values with Tailwind utilities based on designs/specs.md. Mapped design tokens to Tailwind's color scale (gray-900 for primary text, blue-600 for links) to maintain consistency while leveraging the utility classes.
+
+**Event handling in nested components** - The card expansion needed careful event management to prevent inner link clicks from bubbling up. Used stopPropagation strategically to isolate interactive elements while maintaining the card-level expand behavior.
+
+**API parameter transformation** - Different filter types required different serialization (arrays for multi-select, strings for booleans). Built a mapping function that normalizes the filter state into the expected API format.
+
+**Responsive sidebar behavior** - Implemented a transform-based slide-in overlay for mobile that transitions to a static sidebar on desktop.
 
 ## Additional Notes
 
-[Any other notes you'd like to share about your implementation]
+**Component architecture** - Broke down CandidateCard and CandidateList into smaller, focused components for better maintainability. CandidateCard splits into CandidateHeader, CandidateJob, CandidateAvailability, and CandidateInterviews. CandidateList uses separate components for loading, error, empty, and content states.
+
+**Loading states** - Implemented skeleton loaders that match the candidate card layout. Shows during API fetches to provide visual feedback and maintain layout stability.
+
+**Expandable candidate cards** - Cards with interviews are expandable on click. The expand icon only appears for candidates that have interviews. Initially collapsed, cards show only essential info (name, position, job title, status). Clicking expands to reveal availability and interview details. Used event isolation to prevent inner link clicks from triggering expansion.
+
+**Error handling** - Added comprehensive error handling with user-friendly messages. Distinguishes between network errors and API errors, providing actionable feedback when the backend isn't running.
+
+**Code organization** - Separated concerns with clear component boundaries. Each component has a single responsibility, making the codebase easier to maintain and test.
+
+**Deployment** - Both frontend and backend are deployed to Vercel. The frontend is a static React build, and the backend FastAPI app runs on Vercel's serverless functions.
