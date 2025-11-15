@@ -1,8 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { ActionBar } from './components/ActionBar';
+import { CandidateList } from './components/CandidateList';
+import { Pagination } from './components/Pagination';
+import type { SortOption } from './components/SortDropdown';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
@@ -10,6 +13,11 @@ function App() {
     Record<string, boolean>
   >({});
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCandidates, setTotalCandidates] = useState(0);
+  const [fullTextSearch, setFullTextSearch] = useState(false);
+  const [sort, setSort] = useState<SortOption>('activity_desc');
+  const perPage = 5;
 
   const handleFilterChange = useCallback((key: string, checked: boolean) => {
     setSelectedFilters((prev) => {
@@ -31,6 +39,20 @@ function App() {
     });
   }, []);
 
+  const handlePageChange = useCallback((page: number) => {
+    setCurrentPage(page);
+  }, []);
+
+  const handleTotalCandidatesChange = useCallback((total: number) => {
+    setTotalCandidates(total);
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchValue, selectedFilters, fullTextSearch, sort]);
+
+  const totalPages = Math.ceil(totalCandidates / perPage);
+
   return (
     <div className="h-dvh bg-[#f7f8f7] flex flex-col overflow-hidden">
       {/* Header */}
@@ -51,6 +73,10 @@ function App() {
           onFilterChange={handleFilterChange}
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
+          fullTextSearch={fullTextSearch}
+          onFullTextSearchChange={setFullTextSearch}
+          sort={sort}
+          onSortChange={setSort}
         />
 
         {/* Backdrop overlay for mobile/tablet */}
@@ -62,17 +88,39 @@ function App() {
           />
         )}
 
-        {/* Main Content - Scrollable */}
-        <main className="flex-1 px-4 sm:px-6 pb-6 overflow-y-auto min-h-0 -webkit-overflow-scrolling-touch">
-          {/* TODO: Add action buttons here (Generate Report, + Add Candidate, Bulk Actions) */}
-          {/* Action Buttons and Filter Chips Section */}
-          <ActionBar
-            selectedFilters={selectedFilters}
-            onRemoveFilter={handleRemoveFilter}
-            onToggleFilters={() => setIsSidebarOpen(!isSidebarOpen)}
-          />
-          {/* TODO: Add candidate list here */}
-          {/* TODO: Add pagination here */}
+        {/* Main Content */}
+        <main className="flex-1 px-4 sm:px-6 pb-6 min-h-0 flex flex-col overflow-hidden">
+          {/* Action Buttons and Filter Chips Section - Sticky */}
+          <div className="sticky top-0 z-10 bg-[#f7f8f7] pt-4 pb-4 shrink-0">
+            <ActionBar
+              selectedFilters={selectedFilters}
+              onRemoveFilter={handleRemoveFilter}
+              onToggleFilters={() => setIsSidebarOpen(!isSidebarOpen)}
+              candidateCount={totalCandidates}
+            />
+          </div>
+
+          {/* Scrollable Content */}
+          <div className="flex-1 min-h-0 overflow-y-auto -webkit-overflow-scrolling-touch">
+            <div className="flex flex-col gap-4">
+              {/* Candidate List */}
+              <CandidateList
+                searchValue={searchValue}
+                currentPage={currentPage}
+                perPage={perPage}
+                selectedFilters={selectedFilters}
+                onTotalCandidatesChange={handleTotalCandidatesChange}
+                fullTextSearch={fullTextSearch}
+                sort={sort}
+              />
+              {/* Pagination */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          </div>
         </main>
       </div>
     </div>

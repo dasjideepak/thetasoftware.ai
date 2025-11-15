@@ -2,43 +2,47 @@
 
 **TEMPLATE - Complete this form when submitting your work**
 
-**Candidate Name**: [Your Name]
-**Date**: [Date]
-**Time Spent**: [Approximate hours]
+**Candidate Name**: Deepak Sharma
+**Date**: 15th Nov, 2025
+**Time Spent**: 6-7 hours
 
 ## What I Completed
 
 ### Frontend
-- [ ] Sidebar search input
-- [ ] Full Text Search toggle
-- [ ] Sort dropdown
-- [ ] Collapsible filter sections
-- [ ] Reset Filters button
-- [ ] Candidate list display
-- [ ] Candidate card components
-- [ ] Pagination component
-- [ ] Search filtering functionality
-- [ ] Sort functionality
-- [ ] Pagination logic
+
+- [x] Sidebar search input
+- [x] Full Text Search toggle
+- [x] Sort dropdown
+- [x] Collapsible filter sections
+- [x] Reset Filters button
+- [x] Candidate list display
+- [x] Candidate card components
+- [x] Pagination component
+- [x] Search filtering functionality
+- [x] Sort functionality
+- [x] Pagination logic
 
 ### Backend
-- [ ] GET /api/candidates endpoint
-- [ ] Filtering by search term
-- [ ] Sorting logic
-- [ ] Pagination logic
-- [ ] CORS configuration
+
+- [x] GET /api/candidates endpoint
+- [x] Filtering by search term
+- [x] Sorting logic
+- [x] Pagination logic
+- [x] CORS configuration
 
 ### Styling
-- [ ] Visual accuracy to design
-- [ ] Hover states
-- [ ] Focus states
-- [ ] Responsive layout (if attempted)
+
+- [x] Visual accuracy to design
+- [x] Hover states
+- [x] Focus states
+- [x] Responsive layout (if attempted)
 
 ## What I Would Do With More Time
 
 [List features, improvements, or refactorings you would add if you had more time]
 
 Examples:
+
 - Add loading states with skeleton loaders
 - Implement more robust error handling
 - Add unit tests for components
@@ -50,16 +54,21 @@ Examples:
 
 ## Libraries/Packages Added
 
-[If you added any packages beyond the starter, list them here with explanations]
+- `@tabler/icons-react` – installed for adding icon support in the React app
 
-Example:
-- `package-name` - Used for [specific purpose]
+[If you added any packages beyond the starter, list them here with explanations]
 
 ## AI Tools Used
 
-[If you used any AI tools (ChatGPT, Copilot, Claude, etc.), note which ones and how]
+I used a few AI tools while building this:
+
+- **Claude Code**: Helped me figure out FastAPI since I'm more familiar with Node.js backends. Used it mainly for the `/api/candidates` endpoint structure and getting the query params right. Also helped with the search and pagination logic and used it a couple times when I hit TypeScript errors or needed a quick answer on React patterns.
+- **GitHub Copilot**: Had it running in the background for autocomplete. Mostly used it for React/TypeScript boilerplate and when I was stuck on UI stuff.
+
+Overall, these tools saved me time, especially with FastAPI since it was new to me. They helped me move faster on syntax and patterns I wasn't super familiar with.
 
 Examples:
+
 - Used GitHub Copilot for autocompletion
 - Used ChatGPT to debug a TypeScript error
 - Used Claude to understand FastAPI query parameters

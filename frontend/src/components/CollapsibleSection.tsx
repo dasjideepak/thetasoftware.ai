@@ -36,10 +36,10 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-[#e1e1e1]">
+    <div className="border-b border-[#e1e1e1] ">
       {/* TODO: Make this button toggle the isOpen state */}
       <button
-        className="w-full flex items-center justify-between py-3 text-[14px] font-medium text-[#15372c] hover:bg-gray-50"
+        className="w-full flex items-center justify-between py-3 text-[14px] font-medium text-[#15372c] hover:bg-gray-50 cursor-pointer"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <span className="leading-[19.5px]">{title}</span>

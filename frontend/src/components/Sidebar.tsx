@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { SearchInput } from './SearchInput';
 import { FilterSection } from './FilterSection';
 import { filterSections } from '../data/filterConfig';
 import { IconX } from '@tabler/icons-react';
+import { SortDropdown, type SortOption } from './SortDropdown';
 
 interface SidebarProps {
   searchValue: string;
@@ -11,6 +12,10 @@ interface SidebarProps {
   onFilterChange: (key: string, checked: boolean) => void;
   isOpen?: boolean;
   onClose?: () => void;
+  fullTextSearch: boolean;
+  onFullTextSearchChange: (value: boolean) => void;
+  sort: SortOption;
+  onSortChange: (value: SortOption) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -20,9 +25,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onFilterChange,
   isOpen = false,
   onClose,
+  fullTextSearch,
+  onFullTextSearchChange,
+  sort,
+  onSortChange,
 }) => {
-  const [fullTextSearch, setFullTextSearch] = useState(false);
-
   const handleResetFilters = useCallback(() => {
     Object.keys(selectedFilters).forEach((key) => {
       onFilterChange(key, false);
@@ -63,7 +70,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   type="checkbox"
                   id="fullTextSearch"
                   checked={fullTextSearch}
-                  onChange={(e) => setFullTextSearch(e.target.checked)}
+                  onChange={(e) => onFullTextSearchChange(e.target.checked)}
                   className="sr-only peer"
                 />
                 <div className="w-[50px] h-[25px] bg-[#ccd4d1] rounded-full peer peer-checked:bg-[#047957] peer-focus:ring-2 peer-focus:ring-[#047957]/20 transition-colors duration-200 ease-in-out">
@@ -88,24 +95,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </p>
           </div>
 
-          {/* Sort Dropdown (visual only) */}
+          {/* Sort Dropdown */}
           <div className="mt-4">
-            <div className="w-full h-[36px] px-3 flex items-center justify-between border border-[#e1e1e1] bg-white rounded text-[14px] text-[#333333]">
-              <span className="truncate">Last Activity (new to old)</span>
-              <svg
-                className="w-3.5 h-3.5 text-[#909090] shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
+            <SortDropdown value={sort} onChange={onSortChange} />
           </div>
 
           {/* Filter Sections - TODO: Candidates need to build these */}

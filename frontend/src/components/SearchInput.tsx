@@ -10,7 +10,7 @@ interface SearchInputProps {
 export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onChange,
-  placeholder = "Search candidates",
+  placeholder = 'Search candidates',
   debounceMs = 300,
 }) => {
   const [localValue, setLocalValue] = useState(value);
@@ -41,7 +41,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       </div>
       <input
         type="text"
-        className="w-full h-[32px] pl-10 pr-3 text-[13.7px] border border-[#cccccc] rounded-[2px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-[#909090] placeholder:text-[#909090] font-light"
+        className="w-full h-[32px] pl-10 pr-3 text-[13.7px] border border-[#cccccc] rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-[#909090] placeholder:text-[#909090] font-light"
         placeholder={placeholder}
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
