@@ -10,14 +10,14 @@ interface ActionBarProps {
   selectedFilters: Record<string, boolean>;
   onRemoveFilter: (key: string) => void;
   onToggleFilters?: () => void;
-  candidateCount?: number;
+  candidateCount: number;
 }
 
 export const ActionBar: React.FC<ActionBarProps> = ({
   selectedFilters,
   onRemoveFilter,
   onToggleFilters,
-  candidateCount = 50,
+  candidateCount,
 }) => {
   const getFilterLabel = (key: string): string => {
     for (const section of filterSections) {
