@@ -3,6 +3,7 @@ import type { Candidate } from '../types/candidate';
 import { CandidateCard } from './CandidateCard';
 import { filterSections } from '../data/filterConfig';
 import type { SortOption } from './SortDropdown';
+import { IconAlertTriangle } from '@tabler/icons-react';
 
 interface CandidateListProps {
   searchValue: string;
@@ -137,7 +138,24 @@ export const CandidateList: React.FC<CandidateListProps> = ({
         setCandidates(data.candidates || []);
         onTotalCandidatesChange?.(data.total || 0);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+        let errorMessage = 'An error occurred while fetching candidates';
+
+        if (err instanceof TypeError && err.message === 'Failed to fetch') {
+          errorMessage =
+            'Unable to connect to the backend server. Please make sure the backend is running on http://localhost:8000';
+        } else if (err instanceof Error) {
+          if (
+            err.message.includes('Failed to fetch') ||
+            err.message.includes('NetworkError')
+          ) {
+            errorMessage =
+              'Unable to connect to the backend server. Please make sure the backend is running on http://localhost:8000';
+          } else {
+            errorMessage = err.message;
+          }
+        }
+
+        setError(errorMessage);
         setCandidates([]);
         onTotalCandidatesChange?.(0);
       } finally {
@@ -169,7 +187,18 @@ export const CandidateList: React.FC<CandidateListProps> = ({
   if (error) {
     return (
       <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-8 text-center text-red-500">Error: {error}</div>
+        <div className="p-8 text-center">
+          <div className="flex items-center justify-center text-red-600 font-medium mb-2 gap-2">
+            <span>
+              <IconAlertTriangle
+                className="w-5 h-5 text-red-500"
+                aria-hidden="true"
+              />
+            </span>
+            Connection Error
+          </div>
+          <div className="text-gray-700 text-sm">{error}</div>
+        </div>
       </div>
     );
   }
