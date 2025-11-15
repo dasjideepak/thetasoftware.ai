@@ -11,8 +11,22 @@ interface CandidateCardProps {
   candidate: Candidate;
 }
 
+/**
+ * CandidateCard component displays individual candidate information.
+ * Supports expand/collapse functionality for candidates with interviews.
+ *
+ * @param {CandidateCardProps} props - Component props
+ * @param {Candidate} props.candidate - The candidate data to display
+ * @returns {JSX.Element} The candidate card component
+ */
 export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  /**
+   * Gets the previous affiliation text (position and/or company).
+   *
+   * @returns {string} The formatted affiliation string
+   */
   const getPreviousAffiliation = () => {
     if (candidate.position && candidate.company) {
       if (candidate.position.toLowerCase().includes('at ')) {
@@ -31,6 +45,11 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
     return '';
   };
 
+  /**
+   * Generates the status text based on the candidate's action link and interview status.
+   *
+   * @returns {string} The formatted status text
+   */
   const getStatusText = () => {
     const actionLink = candidate?.action_link;
     const interviewCount = candidate?.interviews?.length || 0;
@@ -70,11 +89,17 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
     return `${actionLink} for ${candidate.name}`;
   };
 
+  /**
+   * Checks if the candidate has interviews.
+   */
   const hasInterviews =
     candidate?.has_interviews &&
     candidate?.interviews &&
     candidate?.interviews?.length > 0;
 
+  /**
+   * Handles card click to toggle expand/collapse state for candidates with interviews.
+   */
   const handleCardClick = () => {
     if (!hasInterviews) {
       return;
@@ -82,6 +107,11 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
     setIsExpanded(!isExpanded);
   };
 
+  /**
+   * Prevents event propagation when clicking on inner elements.
+   *
+   * @param {React.MouseEvent} e - The mouse event
+   */
   const handleInnerClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -126,7 +156,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
 
           {!candidate?.has_interviews && (
             <>
-              <div className="text-xs sm:text-sm text-[#5d5d5d] mt-3 sm:mt-4 ml-0 sm:ml-2 font-normal">
+              <div className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4 ml-0 sm:ml-2 font-normal">
                 {candidate.status}
               </div>
             </>
@@ -135,7 +165,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
 
         {/* Job/Status Column */}
         <div className="flex flex-col ml-0 sm:ml-2 md:ml-2">
-          <div className="text-sm sm:text-base font-medium text-[#15372c] mb-1">
+          <div className="text-sm sm:text-base font-medium text-gray-900 mb-1">
             {candidate.job_title}
           </div>
 
@@ -149,7 +179,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
               <div className="text-xs sm:text-sm mt-3 sm:mt-4 sm:-ml-1">
                 <button
                   onClick={handleInnerClick}
-                  className="text-[#00A88F] hover:text-[#008f7a] hover:underline font-medium cursor-pointer transition-colors"
+                  className="text-blue-600 hover:text-blue-700 hover:underline font-medium cursor-pointer transition-colors"
                 >
                   {candidate.action_link}
                 </button>
@@ -165,19 +195,19 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
           {candidate?.availability_status === 'Not Requested' && (
             <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm sm:text-base font-medium text-[#15372c]">
+                <span className="text-sm sm:text-base font-medium text-gray-900">
                   Availability
                 </span>
                 <button
                   onClick={handleInnerClick}
-                  className="pointer-events-auto text-sm sm:text-base text-[#00A88F] hover:text-[#008f7a] font-normal transition-colors"
+                  className="pointer-events-auto text-sm sm:text-base text-blue-600 hover:text-blue-700 font-normal transition-colors"
                 >
                   Not Requested
                 </button>
               </div>
               <button
                 onClick={handleInnerClick}
-                className="cursor-pointer pointer-events-auto text-sm sm:text-base text-[#00A88F] hover:text-[#008f7a] hover:underline font-normal transition-colors"
+                className="cursor-pointer pointer-events-auto text-sm sm:text-base text-blue-600 hover:text-blue-700 hover:underline font-normal transition-colors"
               >
                 Request Availability
               </button>
@@ -190,21 +220,20 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
             candidate?.interviews?.length > 0 && (
               <div className="mt-4 sm:mt-6 w-full pr-0 sm:pr-4 md:pr-6">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 w-full gap-2 sm:gap-0">
-                  <h3 className="text-sm sm:text-base font-normal text-[#15372c]">
+                  <h3 className="text-sm sm:text-base font-normal text-gray-900">
                     Interviews
                   </h3>
-                  <div className="flex flex-wrap items-center gap-1 sm:gap-2 sm:ml-2 bo">
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2 sm:ml-2">
                     <button
                       onClick={handleInnerClick}
-                      className="text-md text-[#00A88F] hover:text-[#008f7a] hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
+                      className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
                     >
                       Schedule all manually
                     </button>
                     <span className="text-gray-400 hidden sm:inline">|</span>
                     <button
                       onClick={handleInnerClick}
-                      className="text-md text-[#00A88F] hover:text-[#008f7a] font-normal cursor-pointer transition-colors whitespace-nowrap underline-offset-2 hover:underline focus:underline"
-                      style={{ textDecorationThickness: '2px' }}
+                      className="text-sm text-blue-600 hover:text-blue-700 font-normal cursor-pointer transition-colors whitespace-nowrap hover:underline"
                     >
                       Automated scheduling
                     </button>
@@ -218,20 +247,20 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
                       key={index}
                       className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2"
                     >
-                      <span className="text-md font-light text-gray-500 wrap-break-words">
+                      <span className="text-sm font-light text-gray-500 wrap-break-words">
                         {interview.name}
                       </span>
                       <div className="flex flex-wrap items-center gap-1 sm:gap-2">
                         <button
                           onClick={handleInnerClick}
-                          className="text-md text-[#00A88F] hover:text-[#008f7a] hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
+                          className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
                         >
                           Schedule manually
                         </button>
                         <span className="text-gray-400">|</span>
                         <button
                           onClick={handleInnerClick}
-                          className="text-md text-[#00A88F] hover:text-[#008f7a] hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
+                          className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
                         >
                           Automated scheduling
                         </button>

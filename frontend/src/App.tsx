@@ -19,6 +19,12 @@ function App() {
   const [sort, setSort] = useState<SortOption>('activity_desc');
   const perPage = 5;
 
+  /**
+   * Handles filter checkbox changes by adding or removing filters from the selected filters.
+   *
+   * @param {string} key - The filter key to add or remove
+   * @param {boolean} checked - Whether the filter is checked or unchecked
+   */
   const handleFilterChange = useCallback((key: string, checked: boolean) => {
     setSelectedFilters((prev) => {
       if (checked) {
@@ -31,6 +37,11 @@ function App() {
     });
   }, []);
 
+  /**
+   * Removes a filter from the selected filters.
+   *
+   * @param {string} key - The filter key to remove
+   */
   const handleRemoveFilter = useCallback((key: string) => {
     setSelectedFilters((prev) => {
       const updated = { ...prev };
@@ -39,10 +50,20 @@ function App() {
     });
   }, []);
 
+  /**
+   * Handles pagination page changes.
+   *
+   * @param {number} page - The page number to navigate to
+   */
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
 
+  /**
+   * Updates the total candidate count from the CandidateList component.
+   *
+   * @param {number} total - The total number of candidates
+   */
   const handleTotalCandidatesChange = useCallback((total: number) => {
     setTotalCandidates(total);
   }, []);
@@ -54,12 +75,12 @@ function App() {
   const totalPages = Math.ceil(totalCandidates / perPage);
 
   return (
-    <div className="h-dvh bg-[#f7f8f7] flex flex-col overflow-hidden">
+    <div className="h-dvh bg-gray-50 flex flex-col overflow-hidden">
       {/* Header */}
       <Header />
 
       {/* Page Title */}
-      <h1 className="text-[34.59px] font-normal text-[#15372c] px-4 sm:px-6 pt-4 pb-3 leading-[46.67px] shrink-0">
+      <h1 className="text-2xl font-normal text-gray-900 px-4 sm:px-6 pt-4 pb-3 shrink-0">
         All Candidates
       </h1>
 
@@ -91,7 +112,7 @@ function App() {
         {/* Main Content */}
         <main className="flex-1 px-4 sm:px-6 pb-6 min-h-0 flex flex-col overflow-hidden">
           {/* Action Buttons and Filter Chips Section - Sticky */}
-          <div className="sticky top-0 z-10 bg-[#f7f8f7] pt-4 pb-4 shrink-0">
+          <div className="sticky top-0 z-10 bg-gray-50 pt-4 pb-4 shrink-0">
             <ActionBar
               selectedFilters={selectedFilters}
               onRemoveFilter={handleRemoveFilter}

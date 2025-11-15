@@ -18,6 +18,12 @@ const sortOptions: { value: SortOption; label: string }[] = [
   { value: 'name_desc', label: 'Name (Z to A)' },
 ];
 
+/**
+ * SortDropdown component provides a dropdown for selecting sort options.
+ *
+ * @param {SortDropdownProps} props - Component props
+ * @returns {JSX.Element} The sort dropdown component
+ */
 export const SortDropdown: React.FC<SortDropdownProps> = ({
   value,
   onChange,
@@ -43,6 +49,11 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({
     };
   }, []);
 
+  /**
+   * Handles selection of a sort option.
+   *
+   * @param {SortOption} optionValue - The selected sort option value
+   */
   const handleSelect = (optionValue: SortOption) => {
     onChange(optionValue);
     setIsOpen(false);
@@ -53,7 +64,7 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full h-[36px] px-3 flex items-center justify-between border border-[#e1e1e1] bg-white text-[14px] text-[#333333] hover:border-[#00A88F] transition-colors cursor-pointer rounded"
+        className="w-full h-9 px-3 flex items-center justify-between border border-gray-200 bg-white text-sm text-gray-900 hover:border-blue-600 transition-colors cursor-pointer rounded"
         aria-label="Sort options"
         aria-expanded={isOpen}
       >
@@ -61,7 +72,7 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({
           {selectedOption?.label || 'Select sort'}
         </span>
         <svg
-          className={`w-3.5 h-3.5 text-[#909090] shrink-0 transition-transform ${
+          className={`w-3.5 h-3.5 text-gray-500 shrink-0 transition-transform ${
             isOpen ? 'rotate-180' : ''
           }`}
           fill="none"
@@ -78,16 +89,16 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({
       </button>
 
       {isOpen && (
-        <div className="absolute z-50 w-full mt-1 bg-white border border-[#e1e1e1] rounded shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded shadow-lg max-h-60 overflow-auto">
           {sortOptions.map((option) => (
             <button
               key={option.value}
               type="button"
               onClick={() => handleSelect(option.value)}
-              className={`w-full px-3 py-2 text-left text-[14px] hover:bg-gray-50 transition-colors cursor-pointer ${
+              className={`w-full px-3 py-2 text-left text-sm hover:bg-gray-50 transition-colors cursor-pointer ${
                 value === option.value
-                  ? 'bg-[#f0f9f7] text-[#00A88F] font-medium'
-                  : 'text-[#333333]'
+                  ? 'bg-blue-50 text-blue-600 font-medium'
+                  : 'text-gray-900'
               }`}
             >
               {option.label}

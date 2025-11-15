@@ -8,11 +8,22 @@ interface FilterOptionProps {
   onChange?: (checked: boolean) => void;
 }
 
+/**
+ * FilterOption component displays a single filter checkbox option.
+ *
+ * @param {FilterOptionProps} props - Component props
+ * @returns {JSX.Element} The filter option component
+ */
 export const FilterOption: React.FC<FilterOptionProps> = ({
   label,
   checked = false,
   onChange,
 }) => {
+  /**
+   * Handles checkbox change event.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.checked);
   };
@@ -23,9 +34,9 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
         type="checkbox"
         checked={checked}
         onChange={handleChange}
-        className="w-4 h-4 text-[#047957] border-[#e1e1e1] rounded focus:ring-[#047957] focus:ring-1"
+        className="w-4 h-4 text-emerald-600 border-gray-200 rounded focus:ring-emerald-600 focus:ring-1"
       />
-      <span className="text-[13px] text-[#333333] leading-[19.5px] flex-1">
+      <span className="text-sm text-gray-900 flex-1">
         {label}
       </span>
     </label>

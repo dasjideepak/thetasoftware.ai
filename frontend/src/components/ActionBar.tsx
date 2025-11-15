@@ -13,12 +13,24 @@ interface ActionBarProps {
   candidateCount: number;
 }
 
+/**
+ * ActionBar component displays candidate count, action buttons, and applied filter chips.
+ *
+ * @param {ActionBarProps} props - Component props
+ * @returns {JSX.Element} The action bar component
+ */
 export const ActionBar: React.FC<ActionBarProps> = ({
   selectedFilters,
   onRemoveFilter,
   onToggleFilters,
   candidateCount,
 }) => {
+  /**
+   * Gets the display label for a filter key by looking it up in filter sections.
+   *
+   * @param {string} key - The filter key
+   * @returns {string} The filter label or the key itself if not found
+   */
   const getFilterLabel = (key: string): string => {
     for (const section of filterSections) {
       const option = section.options.find(
@@ -39,7 +51,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
         {/* Results Count and Filter Button (Mobile) */}
         <div className="flex items-center gap-3">
-          <div className="text-sm text-[#15372c]">
+          <div className="text-sm text-gray-900">
             Showing {candidateCount} candidate applications
           </div>
           {/* Filter Toggle Button - Visible on mobile/tablet, hidden on desktop */}
@@ -57,19 +69,19 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Generate Report Button */}
-          <button className="flex items-center gap-1.5 h-8 px-4 border border-[#00A88F] text-[#00A88F] rounded-xl hover:bg-[#00A88F] hover:text-white transition-colors text-sm font-medium cursor-pointer">
+          <button className="flex items-center gap-1.5 h-8 px-4 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors text-sm font-medium cursor-pointer">
             <span className="font-normal">Generate Report</span>
             <IconChevronDown className="w-4 h-4" />
           </button>
 
           {/* Add Candidate Button */}
-          <button className="flex items-center gap-1.5 h-8 px-4 border border-[#00A88F] text-[#00A88F] rounded-xl hover:bg-[#00A88F] hover:text-white transition-colors text-sm font-medium cursor-pointer">
+          <button className="flex items-center gap-1.5 h-8 px-4 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors text-sm font-medium cursor-pointer">
             <IconPlus className="w-4 h-4" />
             <span className="font-normal">Add Candidate</span>
           </button>
 
           {/* Bulk Actions Button */}
-          <button className="flex items-center gap-1.5 h-8 px-4 border border-[#00A88F] text-[#00A88F] rounded-xl hover:bg-[#00A88F] hover:text-white transition-colors text-sm font-medium cursor-pointer">
+          <button className="flex items-center gap-1.5 h-8 px-4 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors text-sm font-medium cursor-pointer">
             <span className="font-normal">Bulk Actions</span>
             <IconChevronDown className="w-4 h-4" />
           </button>

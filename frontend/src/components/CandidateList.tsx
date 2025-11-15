@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { Candidate } from '../types/candidate';
 import { CandidateCard } from './CandidateCard';
+import { CandidateCardSkeleton } from './CandidateCardSkeleton';
 import { filterSections } from '../data/filterConfig';
 import type { SortOption } from './SortDropdown';
 import { IconAlertTriangle } from '@tabler/icons-react';
@@ -15,6 +16,13 @@ interface CandidateListProps {
   sort: SortOption;
 }
 
+/**
+ * CandidateList component fetches and displays a paginated list of candidates.
+ * Handles search, filtering, sorting, and client-side pagination.
+ *
+ * @param {CandidateListProps} props - Component props
+ * @returns {JSX.Element} The candidate list component
+ */
 export const CandidateList: React.FC<CandidateListProps> = ({
   searchValue,
   currentPage,
@@ -50,6 +58,12 @@ export const CandidateList: React.FC<CandidateListProps> = ({
     // Update refs
     prevFullTextSearchRef.current = fullTextSearch;
     prevSearchValueRef.current = searchValue;
+
+    /**
+     * Gets all source names from the filter configuration.
+     *
+     * @returns {string[]} Array of source names
+     */
     const getSourceNames = () => {
       const sourceSection = filterSections.find(
         (section) => section.title === 'Source'
@@ -60,6 +74,11 @@ export const CandidateList: React.FC<CandidateListProps> = ({
       );
     };
 
+    /**
+     * Maps selected filters to API parameters.
+     *
+     * @returns {Record<string, string[] | string>} Object containing API filter parameters
+     */
     const mapFiltersToApiParams = () => {
       const activeFilters = Object.keys(selectedFilters).filter(
         (key) => selectedFilters[key]
@@ -67,6 +86,12 @@ export const CandidateList: React.FC<CandidateListProps> = ({
       const params: Record<string, string[] | string> = {};
       const sourceNames = getSourceNames();
 
+      /**
+       * Helper function to add a value to an array parameter.
+       *
+       * @param {string} key - The parameter key
+       * @param {string} value - The value to add
+       */
       const addToArray = (key: string, value: string) => {
         if (!params[key]) {
           params[key] = [];
@@ -97,6 +122,11 @@ export const CandidateList: React.FC<CandidateListProps> = ({
       return params;
     };
 
+    /**
+     * Builds URL search parameters from search, sort, and filter values.
+     *
+     * @returns {string} URL-encoded query string
+     */
     const buildUrlParams = () => {
       const params = new URLSearchParams();
 
@@ -124,6 +154,9 @@ export const CandidateList: React.FC<CandidateListProps> = ({
       return params.toString();
     };
 
+    /**
+     * Fetches candidates from the API with current search, filter, and sort parameters.
+     */
     const fetchCandidates = async () => {
       try {
         setLoading(true);
@@ -177,9 +210,18 @@ export const CandidateList: React.FC<CandidateListProps> = ({
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-8 text-center text-gray-500">
-          Loading candidates...
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        {/* Table Header */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 py-3 bg-gray-50 border-b border-gray-200 shrink-0">
+          <div className="text-sm font-medium text-gray-600">Name</div>
+          <div className="text-sm font-medium text-gray-600">Job/Status</div>
+        </div>
+
+        {/* Skeleton Loaders */}
+        <div>
+          {Array.from({ length: perPage }).map((_, index) => (
+            <CandidateCardSkeleton key={index} />
+          ))}
         </div>
       </div>
     );

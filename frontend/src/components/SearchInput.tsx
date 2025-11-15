@@ -7,6 +7,12 @@ interface SearchInputProps {
   debounceMs?: number;
 }
 
+/**
+ * SearchInput component provides a debounced search input field.
+ *
+ * @param {SearchInputProps} props - Component props
+ * @returns {JSX.Element} The search input component
+ */
 export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onChange,
@@ -28,7 +34,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     <div className="relative w-full">
       <div className="absolute left-3 top-1/2 -translate-y-1/2">
         <svg
-          className="w-4 h-4 text-[#909090]"
+          className="w-4 h-4 text-gray-500"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -41,7 +47,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       </div>
       <input
         type="text"
-        className="w-full h-[32px] pl-10 pr-3 text-[13.7px] border border-[#cccccc] rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-[#909090] placeholder:text-[#909090] font-light"
+        className="w-full h-8 pl-10 pr-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-gray-900 placeholder:text-gray-500 font-light"
         placeholder={placeholder}
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}

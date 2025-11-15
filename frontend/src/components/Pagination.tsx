@@ -7,11 +7,22 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+/**
+ * Pagination component displays page numbers with ellipsis for large page counts.
+ *
+ * @param {PaginationProps} props - Component props
+ * @returns {JSX.Element | null} The pagination component or null if only one page
+ */
 export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
 }) => {
+  /**
+   * Generates an array of page numbers to display, including ellipsis for large ranges.
+   *
+   * @returns {(number | string)[]} Array of page numbers and ellipsis strings
+   */
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
     const maxVisible = 9;
@@ -57,12 +68,18 @@ export const Pagination: React.FC<PaginationProps> = ({
     return pages;
   };
 
+  /**
+   * Handles navigation to the previous page.
+   */
   const handlePrevious = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
     }
   };
 
+  /**
+   * Handles navigation to the next page.
+   */
   const handleNext = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
@@ -96,7 +113,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             return (
               <span
                 key={`ellipsis-${index}`}
-                className="px-2 text-[#15372c] text-sm"
+                className="px-2 text-gray-900 text-sm"
               >
                 ...
               </span>
@@ -112,8 +129,8 @@ export const Pagination: React.FC<PaginationProps> = ({
               onClick={() => onPageChange(pageNum)}
               className={`flex items-center justify-center min-w-[32px] h-8 px-2 rounded text-sm font-medium transition-colors ${
                 isActive
-                  ? 'bg-gray-200 text-[#15372c] cursor-default'
-                  : 'text-[#15372c] hover:bg-gray-50 cursor-pointer'
+                  ? 'bg-gray-200 text-gray-900 cursor-default'
+                  : 'text-gray-900 hover:bg-gray-50 cursor-pointer'
               }`}
               aria-label={`Go to page ${pageNum}`}
               aria-current={isActive ? 'page' : undefined}
