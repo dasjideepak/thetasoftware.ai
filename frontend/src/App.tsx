@@ -110,37 +110,32 @@ function App() {
         )}
 
         {/* Main Content */}
-        <main className="flex-1 px-4 sm:px-6 pb-6 min-h-0 flex flex-col overflow-hidden">
-          {/* Action Buttons and Filter Chips Section - Sticky */}
-          <div className="sticky top-0 z-10 bg-gray-50 pt-4 pb-4 shrink-0">
+        <main className="flex-1 px-4 sm:px-6 pb-6 flex flex-col overflow-hidden overflow-y-auto -webkit-overflow-scrolling-touch">
+          <div className="flex flex-col gap-4 pt-4">
+            {/* Action Buttons and Filter Chips Section */}
             <ActionBar
               selectedFilters={selectedFilters}
               onRemoveFilter={handleRemoveFilter}
               onToggleFilters={() => setIsSidebarOpen(!isSidebarOpen)}
               candidateCount={totalCandidates}
             />
-          </div>
 
-          {/* Scrollable Content */}
-          <div className="flex-1 min-h-0 overflow-y-auto -webkit-overflow-scrolling-touch">
-            <div className="flex flex-col gap-4">
-              {/* Candidate List */}
-              <CandidateList
-                searchValue={searchValue}
-                currentPage={currentPage}
-                perPage={perPage}
-                selectedFilters={selectedFilters}
-                onTotalCandidatesChange={handleTotalCandidatesChange}
-                fullTextSearch={fullTextSearch}
-                sort={sort}
-              />
-              {/* Pagination */}
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
+            {/* Candidate List */}
+            <CandidateList
+              searchValue={searchValue}
+              currentPage={currentPage}
+              perPage={perPage}
+              selectedFilters={selectedFilters}
+              onTotalCandidatesChange={handleTotalCandidatesChange}
+              fullTextSearch={fullTextSearch}
+              sort={sort}
+            />
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
         </main>
       </div>

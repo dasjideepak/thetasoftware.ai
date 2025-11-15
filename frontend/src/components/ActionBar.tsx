@@ -69,19 +69,19 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Generate Report Button */}
-          <button className="flex items-center gap-1.5 h-8 px-4 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors text-sm font-medium cursor-pointer">
+          <button className="flex items-center gap-1.5 h-8 px-4 border border-emerald-500 text-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition-colors text-sm font-medium cursor-pointer">
             <span className="font-normal">Generate Report</span>
             <IconChevronDown className="w-4 h-4" />
           </button>
 
           {/* Add Candidate Button */}
-          <button className="flex items-center gap-1.5 h-8 px-4 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors text-sm font-medium cursor-pointer">
+          <button className="flex items-center gap-1.5 h-8 px-4 border border-emerald-500 text-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition-colors text-sm font-medium cursor-pointer">
             <IconPlus className="w-4 h-4" />
             <span className="font-normal">Add Candidate</span>
           </button>
 
           {/* Bulk Actions Button */}
-          <button className="flex items-center gap-1.5 h-8 px-4 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors text-sm font-medium cursor-pointer">
+          <button className="flex items-center gap-1.5 h-8 px-4 border border-emerald-500 text-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition-colors text-sm font-medium cursor-pointer">
             <span className="font-normal">Bulk Actions</span>
             <IconChevronDown className="w-4 h-4" />
           </button>

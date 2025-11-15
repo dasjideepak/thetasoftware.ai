@@ -65,20 +65,22 @@ export const CandidateJob: React.FC<CandidateJobProps> = ({
 
   return (
     <div className="flex flex-col ml-0 sm:ml-2 md:ml-2">
-      <div className="text-sm sm:text-base font-medium text-gray-900 mb-1">
+      <div className="text-sm sm:text-base font-normal text-gray-700 mb-1">
         {candidate.job_title}
       </div>
 
       <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500 mb-1">
-        <IconArrowUp className="w-3 h-3 sm:w-4 sm:h-4" />
-        <span className="wrap-break-words">{getStatusText()}</span>
+        <IconArrowUp className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
+        <span className="wrap-break-words text-gray-400">
+          {getStatusText()}
+        </span>
       </div>
 
       {!candidate?.has_interviews && (
         <div className="text-xs sm:text-sm mt-3 sm:mt-4 sm:-ml-1">
           <button
             onClick={onInnerClick}
-            className="text-blue-600 hover:text-blue-700 hover:underline font-medium cursor-pointer transition-colors"
+            className="text-emerald-500 hover:text-[#0D9968] hover:underline font-medium cursor-pointer transition-colors"
           >
             {candidate.action_link}
           </button>
@@ -87,4 +89,3 @@ export const CandidateJob: React.FC<CandidateJobProps> = ({
     </div>
   );
 };
-

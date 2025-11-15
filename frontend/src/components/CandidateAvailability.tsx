@@ -31,14 +31,14 @@ export const CandidateAvailability: React.FC<CandidateAvailabilityProps> = ({
         </span>
         <button
           onClick={onInnerClick}
-          className="pointer-events-auto text-sm sm:text-base text-blue-600 hover:text-blue-700 font-normal transition-colors"
+          className="pointer-events-auto text-sm sm:text-base text-emerald-500 hover:text-[#0D9968] font-normal transition-colors"
         >
           Not Requested
         </button>
       </div>
       <button
         onClick={onInnerClick}
-        className="cursor-pointer pointer-events-auto text-sm sm:text-base text-blue-600 hover:text-blue-700 hover:underline font-normal transition-colors"
+        className="cursor-pointer pointer-events-auto text-sm sm:text-base text-emerald-500 hover:text-[#0D9968] hover:underline font-normal transition-colors"
       >
         Request Availability
       </button>

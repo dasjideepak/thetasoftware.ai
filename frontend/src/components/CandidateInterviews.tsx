@@ -37,14 +37,14 @@ export const CandidateInterviews: React.FC<CandidateInterviewsProps> = ({
         <div className="flex flex-wrap items-center gap-1 sm:gap-2 sm:ml-2">
           <button
             onClick={onInnerClick}
-            className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
+            className="text-sm text-emerald-500 hover:text-[#0D9968] hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
           >
             Schedule all manually
           </button>
           <span className="text-gray-400 hidden sm:inline">|</span>
           <button
             onClick={onInnerClick}
-            className="text-sm text-blue-600 hover:text-blue-700 font-normal cursor-pointer transition-colors whitespace-nowrap hover:underline"
+            className="text-sm text-emerald-500 hover:text-[#0D9968] font-normal cursor-pointer transition-colors whitespace-nowrap hover:underline"
           >
             Automated scheduling
           </button>
@@ -64,14 +64,14 @@ export const CandidateInterviews: React.FC<CandidateInterviewsProps> = ({
             <div className="flex flex-wrap items-center gap-1 sm:gap-2">
               <button
                 onClick={onInnerClick}
-                className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
+                className="text-sm text-emerald-500 hover:text-[#0D9968] hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
               >
                 Schedule manually
               </button>
               <span className="text-gray-400">|</span>
               <button
                 onClick={onInnerClick}
-                className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
+                className="text-sm text-emerald-500 hover:text-[#0D9968] hover:underline font-normal cursor-pointer transition-colors whitespace-nowrap"
               >
                 Automated scheduling
               </button>

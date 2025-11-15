@@ -136,7 +136,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             onClick={handleResetFilters}
             disabled={Object.keys(selectedFilters).length === 0}
-            className="mt-6 w-full pr-2 py-2 text-blue-600 text-sm font-light flex items-center justify-start gap-2 hover:underline disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:no-underline"
+            className="mt-6 w-full pr-2 py-2 text-blue-500 text-sm font-light flex items-center justify-start gap-2 hover:underline disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:no-underline"
           >
             <svg
               className="w-5 h-5"

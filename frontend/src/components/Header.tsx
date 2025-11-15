@@ -37,7 +37,7 @@ export const Header = () => {
             <div className="hidden md:block relative">
               <button
                 onClick={() => setIsRecruitingOpen(!isRecruitingOpen)}
-                className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors cursor-pointer text-sm font-medium"
+                className="flex items-center gap-1.5 text-emerald-500 hover:text-[#0D9968] transition-colors cursor-pointer text-sm font-medium"
               >
                 <span className="text-lg font-normal">Recruiting</span>
                 <IconChevronDown
@@ -56,13 +56,13 @@ export const Header = () => {
                   href={item.href}
                   className={`text-sm transition-colors relative pb-0.5 ${
                     item.active
-                      ? 'font-medium text-blue-600 hover:text-blue-600'
+                      ? 'font-medium text-emerald-500 hover:text-emerald-500'
                       : 'font-normal text-gray-900 hover:text-gray-700'
                   }`}
                 >
                   {item.label}
                   {item.active && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"></span>
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500"></span>
                   )}
                 </a>
               ))}
@@ -133,7 +133,7 @@ export const Header = () => {
               {/* Recruiting Dropdown for Mobile */}
               <button
                 onClick={() => setIsRecruitingOpen((prev) => !prev)}
-                className="flex items-center justify-between text-blue-600 hover:text-blue-700 transition-colors"
+                className="flex items-center justify-between text-emerald-500 hover:text-[#0D9968] transition-colors"
               >
                 <span>Recruiting</span>
                 <IconChevronDown
@@ -152,7 +152,7 @@ export const Header = () => {
                     onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                     className={`transition-colors py-2 ${
                       item.active
-                        ? 'font-medium text-blue-600 hover:text-blue-600 border-l-4 border-blue-600 pl-3'
+                        ? 'font-medium text-emerald-500 hover:text-emerald-500 border-l-4 border-emerald-500 pl-3'
                         : 'text-black hover:text-gray-700 pl-0'
                     }`}
                   >

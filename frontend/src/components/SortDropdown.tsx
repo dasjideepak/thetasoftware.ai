@@ -97,7 +97,7 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({
               onClick={() => handleSelect(option.value)}
               className={`w-full px-3 py-2 text-left text-sm hover:bg-gray-50 transition-colors cursor-pointer ${
                 value === option.value
-                  ? 'bg-blue-50 text-blue-600 font-medium'
+                  ? 'bg-[#D1FAE5] text-emerald-500 font-medium'
                   : 'text-gray-900'
               }`}
             >

@@ -49,7 +49,7 @@ export const CandidateHeader: React.FC<CandidateHeaderProps> = ({
           e.preventDefault();
           onInnerClick(e);
         }}
-        className="text-sm sm:text-base font-medium text-blue-600 hover:text-blue-800 mb-1 cursor-pointer transition-colors select-text"
+        className="text-sm sm:text-base font-medium text-gray-700 hover:text-gray-800 mb-1 cursor-pointer transition-colors select-text"
       >
         {candidate.name}
       </a>
