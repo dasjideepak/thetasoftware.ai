@@ -10,7 +10,6 @@ interface FilterOptionProps {
 
 export const FilterOption: React.FC<FilterOptionProps> = ({
   label,
-  count,
   checked = false,
   onChange,
 }) => {
@@ -29,9 +28,6 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
       <span className="text-[13px] text-[#333333] leading-[19.5px] flex-1">
         {label}
       </span>
-      {count !== undefined && (
-        <span className="text-[11px] text-[#909090]">{count}</span>
-      )}
     </label>
   );
 };

@@ -24,7 +24,6 @@ export const FilterSection: React.FC<FilterSectionProps> = React.memo(
             <FilterOption
               key={optionKey}
               label={option.label}
-              count={option.count}
               value={option.value}
               checked={isChecked}
               onChange={(checked) => onFilterChange(optionKey, checked)}
